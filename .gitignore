@@ -1,0 +1,17 @@
+# Ignorar arquivos do Visual Studio (.vs, .vscode, .suo)
+.vs/
+.FileContentIndex
+*.suo
+
+# Ignorar caches e metadados
+*.vsidx
+*.v2
+*.1
+*.cache
+*.metadata
+
+# Ignorar arquivos compilados (binários e de depuração)
+bin/
+obj/
+*.dll
+*.pdb
