@@ -1,13 +1,14 @@
-﻿using eCommerce.Models;
+﻿using Api.Models;
+using System.Collections.Generic;
 
-namespace eCommerce.Repositories
+namespace Api.Repositories
 {
     public interface IUsuarioRepository
     {
         public List<Usuario> BuscarUsuarios();
-        public Usuario BuscarUsuario(int id);
+        public Usuario BuscarUsuario(int id_usuario);
         public void InserirUsuario(Usuario usuario);
         public void AlterarUsuario(Usuario usuario);
-        public void ExcluirUsuario(int id);  
+        public void ExcluirUsuario(int id_usuario);
     }
 }
