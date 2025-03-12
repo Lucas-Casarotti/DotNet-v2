@@ -115,13 +115,24 @@ namespace Api.Repositories
 
         public void AlterarUsuario(Usuario usuario)
         {
-            con.Open();
-            command = new SqlCommand();
-            command.CommandText = "UPDATE dbo.Usuarios SET NM_Usuario = @NM_Usuario WHERE ID_Usuario = @ID_Usuario";
-            command.Parameters.AddWithValue("@NM_Usuario", usuario.NM_Usuario);
-            command.Parameters.AddWithValue("@ID_Usuario", usuario.ID_Usuario);
-            command.Connection = con;
-            command.ExecuteNonQuery();
+            try
+            {
+                con.Open();
+                command = new SqlCommand();
+                command.CommandText = "UPDATE dbo.Usuarios SET NM_Usuario = @NM_Usuario WHERE ID_Usuario = @ID_Usuario";
+                command.Parameters.AddWithValue("@NM_Usuario", usuario.NM_Usuario);
+                command.Parameters.AddWithValue("@ID_Usuario", usuario.ID_Usuario);
+                command.Connection = con;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao alterar usuário" + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public void ExcluirUsuario(int id_usuario)
