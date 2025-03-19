@@ -31,14 +31,14 @@ namespace Api.Controllers
         }
 
         [HttpPost("InserirUsuario")]
-        public IActionResult InserirUsuario([FromBody] Usuario param)
+        public IActionResult InserirUsuario([FromBody] Usuarios param)
         {
             _repository.InserirUsuario(param);
             return Ok(param);
         }
 
         [HttpPut("AlterarUsuario")]
-        public IActionResult AlterarUsuario([FromBody] Usuario param)
+        public IActionResult AlterarUsuario([FromBody] Usuarios param)
         {
             var verifica = _repository.BuscarUsuario(param.ID_Usuario);
             if (verifica == null)

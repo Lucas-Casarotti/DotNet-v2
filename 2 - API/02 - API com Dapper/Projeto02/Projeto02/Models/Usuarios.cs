@@ -2,7 +2,7 @@
 
 namespace Api.Models
 {
-    public class Usuario
+    public class Usuarios
     {
         [JsonPropertyName("idUsuario")]
         public int ID_Usuario { get; set; }

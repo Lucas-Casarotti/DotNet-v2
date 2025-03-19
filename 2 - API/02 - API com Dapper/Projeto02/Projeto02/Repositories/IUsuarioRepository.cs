@@ -5,10 +5,10 @@ namespace Api.Repositories
 {
     public interface IUsuarioRepository
     {
-        public List<Usuario> BuscarUsuarios();
-        public Usuario BuscarUsuario(int id_usuario);
-        public void InserirUsuario(Usuario usuario);
-        public void AlterarUsuario(Usuario usuario);
+        public List<Usuarios> BuscarUsuarios();
+        public Usuarios BuscarUsuario(int id_usuario);
+        public void InserirUsuario(Usuarios usuario);
+        public void AlterarUsuario(Usuarios usuario);
         public void ExcluirUsuario(int id_usuario);
     }
 }

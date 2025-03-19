@@ -23,7 +23,7 @@ namespace Api.Repositories
             {
                 con.Open();
                 command = new SqlCommand();
-                command.CommandText = @"SELECT * FROM dbo.Usuarios";
+                command.CommandText = @"SELECT * FROM dbo.Usuarios;";
                 command.Connection = con;
                 dr = command.ExecuteReader();
 
@@ -57,7 +57,7 @@ namespace Api.Repositories
                 command = new SqlCommand();
                 command.CommandText = @"SELECT * 
                                         FROM dbo.Usuarios 
-                                        WHERE Usuarios.ID_Usuario = @ID_Usuario";
+                                        WHERE Usuarios.ID_Usuario = @ID_Usuario;";
                 command.Parameters.AddWithValue("@ID_Usuario", id_usuario);
                 command.Connection = con;
                 dr = command.ExecuteReader();
@@ -95,12 +95,14 @@ namespace Api.Repositories
                                                             ,CD_Inscricao_Nacional)  
                                         VALUES(@NM_Usuario 
                                               ,@Email_Usuario
-                                              ,@CD_Inscricao_Nacional)";
+                                              ,@CD_Inscricao_Nacional);
+                                        SELECT CAST(SCOPE_IDENTITY() AS INT);";
                 command.Parameters.AddWithValue("@NM_Usuario",            usuario.NM_Usuario);
                 command.Parameters.AddWithValue("@Email_Usuario",         usuario.Email_Usuario);
                 command.Parameters.AddWithValue("@CD_Inscricao_Nacional", usuario.CD_Inscricao_Nacional);
                 command.Connection = con;
-                command.ExecuteNonQuery();
+
+                usuario.ID_Usuario = Convert.ToInt32(command.ExecuteScalar());
 
             }
             catch (Exception ex)
@@ -119,8 +121,13 @@ namespace Api.Repositories
             {
                 con.Open();
                 command = new SqlCommand();
-                command.CommandText = "UPDATE dbo.Usuarios SET NM_Usuario = @NM_Usuario WHERE ID_Usuario = @ID_Usuario";
-                command.Parameters.AddWithValue("@NM_Usuario", usuario.NM_Usuario);
+                command.CommandText = @"UPDATE dbo.Usuarios SET NM_Usuario            = @NM_Usuario
+                                                               ,Email_Usuario         = @Email_Usuario
+                                                               ,CD_Inscricao_Nacional = @CD_Inscricao_Nacional
+                                        WHERE ID_Usuario = @ID_Usuario;";
+                command.Parameters.AddWithValue("@NM_Usuario",   usuario.NM_Usuario);
+                command.Parameters.AddWithValue("@Email_Usuario", usuario.Email_Usuario);
+                command.Parameters.AddWithValue("@CD_Inscricao_Nacional", usuario.CD_Inscricao_Nacional);
                 command.Parameters.AddWithValue("@ID_Usuario", usuario.ID_Usuario);
                 command.Connection = con;
                 command.ExecuteNonQuery();
@@ -141,7 +148,8 @@ namespace Api.Repositories
             {
                 con.Open();
                 command = new SqlCommand();
-                command.CommandText = "DELETE dbo.Usuarios WHERE ID_Usuario = @ID_Usuario";
+                command.CommandText = @"DELETE dbo.Usuarios 
+                                        WHERE ID_Usuario = @ID_Usuario;";
                 command.Parameters.AddWithValue("@ID_Usuario", id_usuario);
                 command.Connection = con;
                 command.ExecuteNonQuery();
